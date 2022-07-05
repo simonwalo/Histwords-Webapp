@@ -26,6 +26,7 @@ def read_file(filename):
 @st.cache(allow_output_mutation = True)
 def load_data():
     models_all = {
+        1800: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1800.pickle")),
         1810: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1810.pickle")),
         1820: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1820.pickle")),
         1830: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1830.pickle")),
@@ -46,11 +47,42 @@ def load_data():
         1980: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1980.pickle")),
         1990: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1990.pickle"))
     }
-    return models_all
+    yield models_all
 
 models_all = load_data()
 
 keyword = st.text_input("Input term", "gay")
+
+st.subheader('Most similar terms')
+
+years=[]
+simterms=[]
+
+for x, y in models_all.items():
+    years.append(x)
+    simterms.append(y.most_similar(keyword))
+
+simterms2 = []
+for x in simterms:
+    for y in x:
+        simterms2.append(y[0])
+
+simterms3 = np.array_split(simterms2, 19)
+
+simterms4 = []
+for array in simterms3:
+    simterms4.append(list(array))
+
+simterms5 = []
+for x in simterms4:
+    simterms5.append((', '.join(x)))
+
+simtermstable = pd.DataFrame(zip(years, simterms5))
+simtermstable.columns = ["year", "terms"]
+
+st.table(simtermstable)
+
+
 
 
 st.subheader('Semantic Change')
