@@ -52,7 +52,7 @@ def similarterms():
         for y in x:
             simterms2.append(y[0])
 
-    simterms3 = np.array_split(simterms2, 19)
+    simterms3 = np.array_split(simterms2, 4)
 
     simterms4 = []
     for array in simterms3:
