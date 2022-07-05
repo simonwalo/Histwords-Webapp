@@ -26,25 +26,9 @@ def read_file(filename):
 @st.cache(allow_output_mutation = True)
 def load_data():
     models_all = {
-        1800: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1800.pickle")),
         1810: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1810.pickle")),
-        1820: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1820.pickle")),
-        1830: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1830.pickle")),
-        1840: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1840.pickle")),
-        1850: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1850.pickle")),
-        1860: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1860.pickle")),
         1870: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1870.pickle")),
-        1880: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1880.pickle")),
-        1890: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1890.pickle")),
-        1900: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1900.pickle")),
-        1910: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1910.pickle")),
-        1920: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1920.pickle")),
         1930: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1930.pickle")),
-        1940: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1940.pickle")),
-        1950: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1950.pickle")),
-        1960: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1960.pickle")),
-        1970: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1970.pickle")),
-        1980: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1980.pickle")),
         1990: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1990.pickle"))
     }
     return models_all
