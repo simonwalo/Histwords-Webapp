@@ -28,5 +28,3 @@ st.write(data.most_similar("work"))
 
 
 
-
-semchange(keyword)
