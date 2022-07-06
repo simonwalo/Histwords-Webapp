@@ -47,9 +47,9 @@ def similarterms():
     for year, model in models_all.items():
         if model[keyword].all() == models_all[1810]['biology'].all():
             st.write('Keyword not available for ', year)
-        if model[keyword].all() != models_all[1810]['biology'].all():
+        else:
             years.append(year)
-        simterms.append(model.most_similar(keyword))
+            simterms.append(model.most_similar(keyword))
 
     simterms2 = []
     for x in simterms:
