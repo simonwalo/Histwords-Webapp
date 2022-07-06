@@ -36,6 +36,7 @@ def load_data():
 models_all = load_data()
 
 keyword = st.text_input("Input term", "gay")
+keyword = keyword.lower()
 
 st.subheader('Most similar terms')
 
@@ -43,9 +44,12 @@ def similarterms():
     years=[]
     simterms=[]
 
-    for x, y in models_all.items():
-        years.append(x)
-        simterms.append(y.most_similar(keyword))
+    for year, model in models_all.items():
+        if model[keyword].all() == models_all[1810]['biology'].all():
+            st.write('Keyword not available for ', year)
+        if model[keyword].all() != models_all[1810]['biology'].all():
+            years.append(year)
+        simterms.append(model.most_similar(keyword))
 
     simterms2 = []
     for x in simterms:
@@ -82,9 +86,12 @@ def semchange(keyword):
 
     for year, model in models_all.items():
         if year in range(1810, 2000, 60):
-            tempsim = model.most_similar(keyword, topn=7)
-            for term, vector in tempsim:
-                sim_words.append(term)
+            if model[keyword].all() == models_all[1810]['biology'].all():
+                st.write('Keyword not available for ', year)
+            if model[keyword].all() != models_all[1810]['biology'].all():
+                tempsim = model.most_similar(keyword, topn=7)
+                for term, vector in tempsim:
+                    sim_words.append(term)
 
     sim_words = list(set(sim_words))
 
@@ -97,8 +104,9 @@ def semchange(keyword):
 
     for year, model in models_all.items():
         if year in range(1810, 2000, 60):
-            temp_keyword_vector = np.array([model[keyword]])
-            keyword_vectors = np.append(keyword_vectors, temp_keyword_vector, axis=0)
+            if model[keyword].all() != models_all[1810]['biology'].all():
+                temp_keyword_vector = np.array([model[keyword]])
+                keyword_vectors = np.append(keyword_vectors, temp_keyword_vector, axis=0)
 
     # add keyword vectors from all periods to vectors of similar words 1990
 
@@ -113,7 +121,8 @@ def semchange(keyword):
     labels = sim_words
     for year, model in models_all.items():
         if year in range(1810, 2000, 60):
-            labels.append(keyword + str(year))
+            if model[keyword].all() != models_all[1810]['biology'].all():
+                labels.append(keyword + str(year))
 
     #plot results
 
@@ -135,4 +144,3 @@ def semchange(keyword):
 
 
 semchange(keyword)
-
