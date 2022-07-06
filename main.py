@@ -7,64 +7,70 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.decomposition import PCA
 from adjustText import adjust_text
+import s3fs
 
 
 st.title('Historical Word Embeddings')
 
+# Create connection object.
+# `anon=False` means not anonymous, i.e. it uses access keys to pull data.
+
+fs = s3fs.S3FileSystem(anon=False)
+fs.ls('bricktamlandstreamlitbucket')
+
+def read_file(filename):
+    with fs.open(filename) as f:
+        return f.read()
+
+
 @st.cache(allow_output_mutation = True)
 def load_data():
     models_all = {
-        1800: pickle.load(open("./data/embeddings1800.pickle", 'rb')),
-        1810: pickle.load(open("./data/embeddings1810.pickle", 'rb')),
-        1820: pickle.load(open("./data/embeddings1820.pickle", 'rb')),
-        1830: pickle.load(open("./data/embeddings1830.pickle", 'rb')),
-        1840: pickle.load(open("./data/embeddings1840.pickle", 'rb')),
-        1850: pickle.load(open("./data/embeddings1850.pickle", 'rb')),
-        1860: pickle.load(open("./data/embeddings1860.pickle", 'rb')),
-        1870: pickle.load(open("./data/embeddings1870.pickle", 'rb')),
-        1880: pickle.load(open("./data/embeddings1880.pickle", 'rb')),
-        1890: pickle.load(open("./data/embeddings1890.pickle", 'rb')),
-        1900: pickle.load(open("./data/embeddings1900.pickle", 'rb')),
-        1910: pickle.load(open("./data/embeddings1910.pickle", 'rb')),
-        1920: pickle.load(open("./data/embeddings1920.pickle", 'rb')),
-        1930: pickle.load(open("./data/embeddings1930.pickle", 'rb')),
-        1940: pickle.load(open("./data/embeddings1940.pickle", 'rb')),
-        1950: pickle.load(open("./data/embeddings1950.pickle", 'rb')),
-        1960: pickle.load(open("./data/embeddings1960.pickle", 'rb')),
-        1970: pickle.load(open("./data/embeddings1970.pickle", 'rb')),
-        1980: pickle.load(open("./data/embeddings1980.pickle", 'rb')),
-        1990: pickle.load(open("./data/embeddings1990.pickle", 'rb')),
+        1810: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1810.pickle")),
+        1870: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1870.pickle")),
+        1930: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1930.pickle")),
+        1990: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1990.pickle"))
     }
     return models_all
 
-# Create a text element and let the reader know the data is loading.
-data_load_state = st.text('Loading data...')
-# Load data.
 models_all = load_data()
-# Notify the reader that the data was successfully loaded.
-data_load_state.text("Data loaded to cache!")
-
 
 keyword = st.text_input("Input term", "gay")
 
+st.subheader('Most similar terms')
 
-st.subheader('Most similar words per decade')
+def similarterms():
+    years=[]
+    simterms=[]
 
-def simterms(keyword):
-
-    data = pd.DataFrame()
-    data['year'] = range(1800, 2000, 10)
-
-    d = []
     for x, y in models_all.items():
-        temp = y.most_similar(positive = keyword, topn=1)
-        for term, vector in temp:
-            d.append(term)
+        years.append(x)
+        simterms.append(y.most_similar(keyword))
 
-    data['terms'] = d
-    st.dataframe(data)
+    simterms2 = []
+    for x in simterms:
+        for y in x:
+            simterms2.append(y[0])
 
-simterms(keyword)
+    simterms3 = np.array_split(simterms2, 4)
+
+    simterms4 = []
+    for array in simterms3:
+        simterms4.append(list(array))
+
+    simterms5 = []
+    for x in simterms4:
+        simterms5.append((', '.join(x)))
+
+    simtermstable = pd.DataFrame(zip(years, simterms5))
+    simtermstable.columns = ["year", "terms"]
+    return simtermstable
+
+simtermstable = similarterms()
+st.table(simtermstable)
+
+
+
 
 st.subheader('Semantic Change')
 
@@ -127,4 +133,6 @@ def semchange(keyword):
     st.pyplot(fig)
     plt.close()
 
+
 semchange(keyword)
+
