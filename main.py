@@ -27,8 +27,11 @@ def read_file(filename):
 def load_data():
     models_all = {
         1810: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1810.pickle")),
+        1840: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1810.pickle")),
         1870: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1870.pickle")),
+        1900: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1810.pickle")),
         1930: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1930.pickle")),
+        1960: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1810.pickle")),
         1990: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1990.pickle"))
     }
     return models_all
@@ -56,7 +59,7 @@ def similarterms():
         for y in x:
             simterms2.append(y[0])
 
-    simterms3 = np.array_split(simterms2, 4)
+    simterms3 = np.array_split(simterms2, len(models_all))
 
     simterms4 = []
     for array in simterms3:
