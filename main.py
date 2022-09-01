@@ -3,11 +3,11 @@ import pickle
 import gensim
 import pandas as pd
 import sys
-import matplotlib.pyplot as plt
 import numpy as np
+import s3fs
+import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from adjustText import adjust_text
-import s3fs
 
 
 st.title('Historical Word Embeddings')
@@ -27,18 +27,18 @@ def read_file(filename):
 def load_data():
     models_all = {
         1810: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1810.pickle")),
-        1840: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1810.pickle")),
+        1840: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1840.pickle")),
         1870: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1870.pickle")),
-        1900: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1810.pickle")),
+        1900: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1900.pickle")),
         1930: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1930.pickle")),
-        1960: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1810.pickle")),
+        1960: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1960.pickle")),
         1990: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1990.pickle"))
     }
     return models_all
 
 models_all = load_data()
 
-keyword = st.text_input("Input term", "gay")
+keyword = st.text_input("Input term", "work")
 keyword = keyword.lower()
 
 st.subheader('Most similar terms')
@@ -145,5 +145,7 @@ def semchange(keyword):
     st.pyplot(fig)
     plt.close()
 
-
 semchange(keyword)
+
+
+
