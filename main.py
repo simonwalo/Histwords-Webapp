@@ -38,7 +38,7 @@ def load_data():
 
 models_all = load_data()
 
-keyword = st.text_input("Input term", "work")
+keyword = st.text_input("Input term", "gay")
 keyword = keyword.lower()
 
 st.subheader('Most similar terms')
