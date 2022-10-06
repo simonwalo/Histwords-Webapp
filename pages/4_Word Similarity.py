@@ -22,7 +22,7 @@ def distchange(keyword1, keyword2):
                 st.write('Keyword ', keyword1, ' not available for ', year)
             if model[keyword2].all() == st.session_state['models_all'][1810]['biology'].all():
                 st.write('Keyword ', keyword2, ' not available for ', year)
-            else:
+            if model[keyword1].all() != st.session_state['models_all'][1810]['biology'].all() and model[keyword2].all() != st.session_state['models_all'][1810]['biology'].all():
                 d.append(
                     {
                         "year": year,
