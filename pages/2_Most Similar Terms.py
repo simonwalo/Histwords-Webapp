@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-from streamlit_app import load_data
+from Main_Page import load_data
 
 st.subheader('Most similar terms')
 

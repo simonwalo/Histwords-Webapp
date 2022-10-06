@@ -1,5 +1,13 @@
+import streamlit as st
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.decomposition import PCA
+from adjustText import adjust_text
+from Main_Page import load_data
 
 st.subheader('Semantic Change')
+
+models_all = load_data()
 
 keyword = st.text_input("Input term", "gay")
 keyword = keyword.lower()

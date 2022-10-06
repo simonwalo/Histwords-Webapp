@@ -1,15 +1,6 @@
 import streamlit as st
 import pickle
-import gensim
-import pandas as pd
-import sys
-import numpy as np
 import s3fs
-import matplotlib.pyplot as plt
-from sklearn.decomposition import PCA
-from adjustText import adjust_text
-from scipy.interpolate import interp1d
-
 
 
 st.title('Historical Word Embeddings')
@@ -25,7 +16,8 @@ def read_file(filename):
         return f.read()
 
 
-@st.cache(allow_output_mutation = True)
+#@st.cache(allow_output_mutation = True)
+@st.experimental_memo
 def load_data():
     models_all = {
         1810: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1810.pickle")),
@@ -37,5 +29,3 @@ def load_data():
         1990: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1990.pickle"))
     }
     return models_all
-
-load_data()

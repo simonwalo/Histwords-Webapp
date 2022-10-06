@@ -1,6 +1,13 @@
+import streamlit as st
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+from scipy.interpolate import interp1d
+from Main_Page import load_data
 
+st.subheader('Word Similarity')
 
-st.subheader('Distance between words')
+models_all = load_data()
 
 keyword1 = st.text_input("Input term 1", "work")
 keyword1 = keyword1.lower()
