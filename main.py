@@ -185,3 +185,5 @@ def distchange(keyword1, keyword2):
     # show plot
     st.pyplot(fig)
     plt.close()
+
+distchange(keyword1, keyword2)
