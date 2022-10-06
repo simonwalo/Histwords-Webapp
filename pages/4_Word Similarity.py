@@ -18,12 +18,17 @@ def distchange(keyword1, keyword2):
 
     for year, model in st.session_state['models_all'].items():
         if year in range(1810, 2000, 30):
-            d.append(
-                {
-                    "year": year,
-                    "similarity": model.n_similarity([keyword1], [keyword2])
-                }
-            )
+            if model[keyword1].all() == st.session_state['models_all'][1810]['biology'].all():
+                st.write('Keyword ', keyword1, ' not available for ', year)
+            if model[keyword2].all() == st.session_state['models_all'][1810]['biology'].all():
+                st.write('Keyword ', keyword2, ' not available for ', year)
+            else:
+                d.append(
+                    {
+                        "year": year,
+                        "similarity": model.n_similarity([keyword1], [keyword2])
+                    }
+                )
 
     data = pd.DataFrame(d)
 
