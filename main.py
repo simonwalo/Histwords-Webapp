@@ -8,6 +8,8 @@ import s3fs
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from adjustText import adjust_text
+from scipy.interpolate import interp1d
+
 
 
 st.title('Historical Word Embeddings')
@@ -149,6 +151,8 @@ semchange(keyword)
 
 
 
+
+
 st.subheader('Distance between words')
 
 keyword1 = st.text_input("Input term 1", "work")
@@ -166,7 +170,7 @@ def distchange(keyword1, keyword2):
             d.append(
                 {
                     "year": year,
-                    term: model.n_similarity([keyword1], [keyword2])
+                    "similarity": model.n_similarity([keyword1], [keyword2])
                 }
             )
 
@@ -174,13 +178,13 @@ def distchange(keyword1, keyword2):
 
     # the trendline
     x = data['year'].tolist()
-    y = data[term].tolist()
+    y = data[similarity].tolist()
 
     fun = interp1d(x, y, kind='cubic')
 
     xnew = np.linspace(1810, 1990, 100)
 
-    plt.plot(xnew, fun(xnew), '-', x, y, 'o')
+    fig = plt.plot(xnew, fun(xnew), '-', x, y, 'o')
 
     # show plot
     st.pyplot(fig)
