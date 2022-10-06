@@ -5,7 +5,6 @@ from main import load_data
 
 st.subheader('Most similar terms')
 
-models_all = load_data()
 
 
 

@@ -29,3 +29,5 @@ def load_data():
         1990: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1990.pickle"))
     }
     return models_all
+
+models_all = load_data()
