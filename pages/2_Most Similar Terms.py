@@ -1,7 +1,6 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-from main import models_all
 
 st.subheader('Most similar terms')
 
@@ -13,8 +12,8 @@ def similarterms():
     years=[]
     simterms=[]
 
-    for year, model in models_all.items():
-        if model[keyword].all() == models_all[1810]['biology'].all():
+    for year, model in st.session_state['models_all'].items():
+        if model[keyword].all() == st.session_state['models_all'][1810]['biology'].all():
             st.write('Keyword not available for ', year)
         else:
             years.append(year)
@@ -25,7 +24,7 @@ def similarterms():
         for y in x:
             simterms2.append(y[0])
 
-    simterms3 = np.array_split(simterms2, len(models_all))
+    simterms3 = np.array_split(simterms2, len(st.session_state['models_all']))
 
     simterms4 = []
     for array in simterms3:
