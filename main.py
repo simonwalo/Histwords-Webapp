@@ -5,6 +5,12 @@ import s3fs
 
 st.title('Historical Word Embeddings')
 
+st.write("Welcome!")
+st.write("This is an interactive web app that allows users to explore how the meaning of words change over time")
+st.write("Creator: Simon Walo")
+st.write("Data source: https://nlp.stanford.edu/projects/histwords/")
+
+
 # Create connection object.
 # `anon=False` means not anonymous, i.e. it uses access keys to pull data.
 

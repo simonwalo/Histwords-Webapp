@@ -1,4 +1,4 @@
-streamlit~=1.10.0
+streamlit~=1.13.0
 gensim~=4.1.2
 pandas~=1.4.2
 matplotlib~=3.5.1
