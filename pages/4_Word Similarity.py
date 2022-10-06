@@ -37,7 +37,7 @@ def distchange(keyword1, keyword2):
 
     fig, ax = plt.subplots()
     ax.plot(xnew, fun(xnew), '-', x, y, 'o')
-    ax.set_xticks([1900, 1950])
+    ax.set_xticks(range(1810, 2000, 30))
 
     # show plot
     st.pyplot(fig)
