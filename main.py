@@ -155,7 +155,7 @@ keyword1 = st.text_input("Input term 1", "work")
 keyword1 = keyword1.lower()
 
 keyword2 = st.text_input("Input term 2", "hard")
-keyword2 = keyword1.lower()
+keyword2 = keyword2.lower()
 
 def distchange(keyword1, keyword2):
 
