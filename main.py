@@ -184,7 +184,8 @@ def distchange(keyword1, keyword2):
 
     xnew = np.linspace(1810, 1990, 100)
 
-    fig = plt.plot(xnew, fun(xnew), '-', x, y, 'o')
+    fig, ax = plt.subplots()
+    ax.plot(xnew, fun(xnew), '-', x, y, 'o')
 
     # show plot
     st.pyplot(fig)
