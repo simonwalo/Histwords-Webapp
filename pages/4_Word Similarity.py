@@ -6,10 +6,10 @@ from scipy.interpolate import interp1d
 
 st.subheader('Word Similarity')
 
-keyword1 = st.text_input("Input term 1", "work")
+keyword1 = st.text_input("Input term 1", "work", key="word1")
 keyword1 = keyword1.lower()
 
-keyword2 = st.text_input("Input term 2", "hard")
+keyword2 = st.text_input("Input term 2", "hard", key="word2")
 keyword2 = keyword2.lower()
 
 def distchange(keyword1, keyword2):
