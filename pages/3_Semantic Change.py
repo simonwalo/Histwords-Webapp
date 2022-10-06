@@ -6,7 +6,7 @@ from adjustText import adjust_text
 
 st.subheader('Semantic Change')
 
-keyword = st.text_input("Input term", "gay")
+keyword = st.text_input("Input term", "gay", key="semkey")
 keyword = keyword.lower()
 
 def semchange(keyword):

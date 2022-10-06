@@ -4,8 +4,8 @@ import pandas as pd
 
 st.subheader('Most similar terms')
 
-simkeyword = st.text_input("Input term", "gay")
-simkeyword = simkeyword.lower()
+keyword = st.text_input("Input term", "gay", key="simkey")
+keyword = keyword.lower()
 
 
 def similarterms():
@@ -13,11 +13,11 @@ def similarterms():
     simterms=[]
 
     for year, model in st.session_state['models_all'].items():
-        if model[simkeyword].all() == st.session_state['models_all'][1810]['biology'].all():
+        if model[keyword].all() == st.session_state['models_all'][1810]['biology'].all():
             st.write('Keyword not available for ', year)
         else:
             years.append(year)
-            simterms.append(model.most_similar(simkeyword))
+            simterms.append(model.most_similar(keyword))
 
     simterms2 = []
     for x in simterms:
