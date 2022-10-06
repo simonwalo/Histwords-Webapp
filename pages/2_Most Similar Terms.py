@@ -1,11 +1,9 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+from main import models_all
 
 st.subheader('Most similar terms')
-
-
-
 
 keyword = st.text_input("Input term", "gay")
 keyword = keyword.lower()
