@@ -71,6 +71,7 @@ def semchange(keyword):
                   head_width=0.03, length_includes_head=True)
 
     st.pyplot(fig)
-    plt.close()
+    fig.clear()
+    plt.close(fig)
 
 semchange(keyword)
