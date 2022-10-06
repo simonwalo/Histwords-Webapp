@@ -31,3 +31,4 @@ def load_data():
     return models_all
 
 models_all = load_data()
+st.write("Data loaded!")
