@@ -3,11 +3,8 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 from scipy.interpolate import interp1d
-from main import load_data
 
 st.subheader('Word Similarity')
-
-models_all = load_data()
 
 keyword1 = st.text_input("Input term 1", "work")
 keyword1 = keyword1.lower()
@@ -19,7 +16,7 @@ def distchange(keyword1, keyword2):
 
     d = []
 
-    for year, model in models_all.items():
+    for year, model in st.session_state['models_all'].items():
         if year in range(1810, 2000, 30):
             d.append(
                 {

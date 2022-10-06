@@ -3,11 +3,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from adjustText import adjust_text
-from main import load_data
 
 st.subheader('Semantic Change')
-
-models_all = load_data()
 
 keyword = st.text_input("Input term", "gay")
 keyword = keyword.lower()
@@ -18,11 +15,11 @@ def semchange(keyword):
 
     sim_words = []
 
-    for year, model in models_all.items():
+    for year, model in st.session_state['models_all'].items():
         if year in range(1810, 2000, 60):
-            if model[keyword].all() == models_all[1810]['biology'].all():
+            if model[keyword].all() == st.session_state['models_all'][1810]['biology'].all():
                 st.write('Keyword not available for ', year)
-            if model[keyword].all() != models_all[1810]['biology'].all():
+            if model[keyword].all() != st.session_state['models_all'][1810]['biology'].all():
                 tempsim = model.most_similar(keyword, topn=7)
                 for term, vector in tempsim:
                     sim_words.append(term)
@@ -30,15 +27,15 @@ def semchange(keyword):
     sim_words = list(set(sim_words))
 
     # get vectors of similar words in most recent embedding (1990)
-    sim_vectors1990 = np.array([models_all[1990][w] for w in sim_words])
+    sim_vectors1990 = np.array([st.session_state['models_all'][1990][w] for w in sim_words])
 
     # get vectors of keyword in all periods
 
     keyword_vectors = np.zeros(shape=(0,300))
 
-    for year, model in models_all.items():
+    for year, model in st.session_state['models_all'].items():
         if year in range(1810, 2000, 60):
-            if model[keyword].all() != models_all[1810]['biology'].all():
+            if model[keyword].all() != st.session_state['models_all'][1810]['biology'].all():
                 temp_keyword_vector = np.array([model[keyword]])
                 keyword_vectors = np.append(keyword_vectors, temp_keyword_vector, axis=0)
 
@@ -53,9 +50,9 @@ def semchange(keyword):
 
     # get labels
     labels = sim_words
-    for year, model in models_all.items():
+    for year, model in st.session_state['models_all'].items():
         if year in range(1810, 2000, 60):
-            if model[keyword].all() != models_all[1810]['biology'].all():
+            if model[keyword].all() != st.session_state['models_all'][1810]['biology'].all():
                 labels.append(keyword + str(year))
 
     #plot results
