@@ -178,7 +178,7 @@ def distchange(keyword1, keyword2):
 
     # the trendline
     x = data['year'].tolist()
-    y = data[similarity].tolist()
+    y = data['similarity'].tolist()
 
     fun = interp1d(x, y, kind='cubic')
 
