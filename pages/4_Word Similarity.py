@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 from scipy.interpolate import interp1d
-from Main import load_data
+from main import load_data
 
 st.subheader('Word Similarity')
 

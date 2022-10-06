@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.decomposition import PCA
 from adjustText import adjust_text
-from Main import load_data
+from main import load_data
 
 st.subheader('Semantic Change')
 
