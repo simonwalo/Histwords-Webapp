@@ -36,8 +36,6 @@ def similarterms():
 
     simtermstable = pd.DataFrame(zip(years, simterms5))
     simtermstable.columns = ["year", "terms"]
-    return simtermstable
+    st.table(simtermstable)
 
-simtermstable = similarterms()
-st.table(simtermstable)
-
+similarterms()
