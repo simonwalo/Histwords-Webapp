@@ -11,6 +11,10 @@ keyword = keyword.lower()
 
 def semchange(keyword):
 
+    if keyword not in st.session_state['models_all'][1810]:
+        st.write('Keyword not found in data. Please check for spelling errors.')
+        return
+
     # get list of all similar words from different periods
 
     sim_words = []

@@ -14,6 +14,13 @@ keyword2 = keyword2.lower()
 
 def distchange(keyword1, keyword2):
 
+    if keyword1 not in st.session_state['models_all'][1810]:
+        st.write('Input term 1 not found in data. Please check for spelling errors.')
+        return
+    if keyword2 not in st.session_state['models_all'][1810]:
+        st.write('Input term 2 not found in data. Please check for spelling errors.')
+        return
+
     d = []
 
     for year, model in st.session_state['models_all'].items():
@@ -36,17 +43,22 @@ def distchange(keyword1, keyword2):
     x = data['year'].tolist()
     y = data['similarity'].tolist()
 
-    fun = interp1d(x, y, kind='cubic')
+    if len(x) < 4:
+        st.write('Not enough data points. Please try other keywords.')
 
-    xnew = np.linspace(1810, 1990, 100)
+    else:
 
-    fig, ax = plt.subplots()
-    ax.plot(xnew, fun(xnew), '-', x, y, 'o')
-    ax.set_xticks(range(1810, 2000, 30))
+        fun = interp1d(x, y, kind='cubic')
 
-    # show plot
-    st.pyplot(fig)
-    fig.clear()
-    plt.close(fig)
+        xnew = np.linspace(x[0], 1990, 100)
+
+        fig, ax = plt.subplots()
+        ax.plot(xnew, fun(xnew), '-', x, y, 'o')
+        ax.set_xticks(range(1810, 2000, 30))
+
+        # show plot
+        st.pyplot(fig)
+        fig.clear()
+        plt.close(fig)
 
 distchange(keyword1, keyword2)

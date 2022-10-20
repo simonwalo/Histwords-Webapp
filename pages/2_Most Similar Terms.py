@@ -9,6 +9,11 @@ keyword = keyword.lower()
 
 
 def similarterms():
+
+    if keyword not in st.session_state['models_all'][1810]:
+        st.write('Keyword not found in data. Please check for spelling errors.')
+        return
+
     years=[]
     simterms=[]
 
