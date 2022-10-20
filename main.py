@@ -8,7 +8,7 @@ st.title('Historical Word Embeddings')
 st.write("Welcome!")
 st.write("This is an interactive web app that allows users to explore how the meaning of words change over time. Use the sidebar on the left to navigate.")
 st.write("Creator: Simon Walo")
-st.write("Data source: https://nlp.stanford.edu/projects/histwords/")
+st.write("Data source: https://nlp.stanford.edu/projects/histwords/ (All English (1800s-1990s))")
 st.write("Please wait while the data is loading:")
 
 # Create connection object.
