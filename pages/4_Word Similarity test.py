@@ -6,20 +6,38 @@ from scipy.interpolate import interp1d
 
 st.subheader('Word Similarity')
 
-keyword1 = st.text_input("Input term 1", "work", key="word1")
-keyword1 = keyword1.lower()
+col1, col2 = st.columns(2)
 
-keyword2 = st.text_input("Input term 2", "hard", key="word2")
-keyword2 = keyword2.lower()
+with col1:
+    keyword1 = st.text_input("Input term A1", "work", key="word1")
+    keyword1 = keyword1.lower()
+
+    keyword3 = st.text_input("Input term B1", "test", key="word3")
+    keyword3 = keyword3.lower()
+
+with col2:
+    keyword2 = st.text_input("Input term A2", "hard", key="word2")
+    keyword2 = keyword2.lower()
+
+    keyword4 = st.text_input("Input term B2", "hello", key="word4")
+    keyword4 = keyword4.lower()
 
 def distchange(keyword1, keyword2):
 
     if keyword1 not in st.session_state['models_all'][1810]:
-        st.write('Input term 1 not found in data. Please check for spelling errors.')
+        st.write('Input term A1 not found in data. Please check for spelling errors.')
         return
     if keyword2 not in st.session_state['models_all'][1810]:
-        st.write('Input term 2 not found in data. Please check for spelling errors.')
+        st.write('Input term A2 not found in data. Please check for spelling errors.')
         return
+    if keyword3 not in st.session_state['models_all'][1810]:
+        st.write('Input term B1 not found in data. Please check for spelling errors.')
+        return
+    if keyword4 not in st.session_state['models_all'][1810]:
+        st.write('Input term B2 not found in data. Please check for spelling errors.')
+        return
+
+### continue from here ###
 
     d = []
 
