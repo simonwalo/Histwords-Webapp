@@ -1,6 +1,7 @@
 import streamlit as st
 import pickle
 import s3fs
+from gensim.models import KeyedVectors
 
 
 st.title('Historical Word Embeddings')
@@ -22,6 +23,21 @@ def read_file(filename):
         return f.read()
 
 
+@st.experimental_memo
+def load_data():
+    models_all = {
+        1810: KeyedVectors.load(read_file("bricktamlandstreamlitbucket/vectors1800.kv")),
+        1840: KeyedVectors.load(read_file("bricktamlandstreamlitbucket/vectors1800.kv")),
+        1870: KeyedVectors.load(read_file("bricktamlandstreamlitbucket/vectors1800.kv")),
+        1900: KeyedVectors.load(read_file("bricktamlandstreamlitbucket/vectors1800.kv")),
+        1930: KeyedVectors.load(read_file("bricktamlandstreamlitbucket/vectors1800.kv")),
+        1960: KeyedVectors.load(read_file("bricktamlandstreamlitbucket/vectors1800.kv")),
+        1990: KeyedVectors.load(read_file("bricktamlandstreamlitbucket/vectors1800.kv"))
+    }
+    return models_all
+
+
+"""
 #@st.cache(allow_output_mutation = True)
 @st.experimental_memo
 def load_data():
@@ -35,6 +51,8 @@ def load_data():
         1990: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1990.pickle"))
     }
     return models_all
+
+"""
 
 st.session_state['models_all'] = load_data()
 st.write("Data loaded!")
