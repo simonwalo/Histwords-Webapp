@@ -2,7 +2,6 @@ import streamlit as st
 import pickle
 import s3fs
 from gensim.models import KeyedVectors
-import smart_open[s3]
 
 
 st.title('Historical Word Embeddings')
