@@ -1,7 +1,6 @@
 import streamlit as st
 import pickle
 import s3fs
-from gensim.models import KeyedVectors
 
 
 st.title('Historical Word Embeddings')
@@ -24,7 +23,7 @@ def read_file(filename):
         return f.read()
 
 
-
+#@st.cache(allow_output_mutation = True)
 @st.experimental_memo
 def load_data():
     models_all = {
@@ -38,10 +37,5 @@ def load_data():
     }
     return models_all
 
-
-
-
 st.session_state['models_all'] = load_data()
 st.write("Data loaded!")
-
-
