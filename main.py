@@ -24,16 +24,13 @@ def read_file(filename):
         return f.read()
 
 
+
 @st.experimental_memo
 def load_data():
+    url = 's3://' + st.secrets['AWS_ACCESS_KEY_ID'] + ":" + st.secrets['AWS_SECRET_ACCESS_KEY'] + "@bricktamlandstreamlitbucket/vectors1810.kv"
+
     models_all = {
-        1810: KeyedVectors.load(read_file("bricktamlandstreamlitbucket/vectors1810.kv")),
-        1840: KeyedVectors.load(read_file("bricktamlandstreamlitbucket/vectors1840.kv")),
-        1870: KeyedVectors.load(read_file("bricktamlandstreamlitbucket/vectors1870.kv")),
-        1900: KeyedVectors.load(read_file("bricktamlandstreamlitbucket/vectors1900.kv")),
-        1930: KeyedVectors.load(read_file("bricktamlandstreamlitbucket/vectors1930.kv")),
-        1960: KeyedVectors.load(read_file("bricktamlandstreamlitbucket/vectors1960.kv")),
-        1990: KeyedVectors.load(read_file("bricktamlandstreamlitbucket/vectors1990.kv"))
+        1810: KeyedVectors.load(url)
     }
     return models_all
 
