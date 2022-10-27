@@ -27,10 +27,10 @@ def read_file(filename):
 
 @st.experimental_memo
 def load_data():
-    url = 's3://' + st.secrets['AWS_ACCESS_KEY_ID'] + ":" + st.secrets['AWS_SECRET_ACCESS_KEY'] + "@bricktamlandstreamlitbucket/vectors1810.kv"
+    url = 's3://' + st.secrets['AWS_ACCESS_KEY_ID'] + ":" + st.secrets['AWS_SECRET_ACCESS_KEY'] + "@bricktamlandstreamlitbucket/vectors1840.kv"
 
     models_all = {
-        1810: KeyedVectors.load(url)
+        1840: KeyedVectors.load(url)
     }
     return models_all
 
