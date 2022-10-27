@@ -27,10 +27,14 @@ def read_file(filename):
 
 @st.experimental_memo
 def load_data():
-    url = 's3://' + st.secrets['AWS_ACCESS_KEY_ID'] + ":" + st.secrets['AWS_SECRET_ACCESS_KEY'] + "@bricktamlandstreamlitbucket/vectors1840.kv"
-
     models_all = {
-        1840: KeyedVectors.load(url)
+        1810: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1810.pickle")),
+        1840: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1840.pickle")),
+        1870: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1870.pickle")),
+        1900: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1900.pickle")),
+        1930: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1930.pickle")),
+        1960: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1960.pickle")),
+        1990: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1990.pickle"))
     }
     return models_all
 
@@ -40,4 +44,4 @@ def load_data():
 st.session_state['models_all'] = load_data()
 st.write("Data loaded!")
 
-data = load_data()
+
