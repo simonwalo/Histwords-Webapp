@@ -26,7 +26,7 @@ def read_file(filename):
 #@st.cache(allow_output_mutation = True)
 @st.experimental_memo
 def load_data():
-    st.session_state['models_all'] = {
+    models_all = {
         1810: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1810.pickle")),
         1840: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1840.pickle")),
         1870: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1870.pickle")),
@@ -35,6 +35,10 @@ def load_data():
         1960: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1960.pickle")),
         1990: pickle.loads(read_file("bricktamlandstreamlitbucket/embeddings1990.pickle"))
     }
+    return models_all
 
-load_data()
+if 'models_all' not in st.session_state:
+    st.experimental_memo.clear()
+    st.session_state['models_all'] = load_data()
+
 st.write("Data loaded!")
