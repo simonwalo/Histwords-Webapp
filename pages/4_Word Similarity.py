@@ -12,14 +12,14 @@ with col1:
     keyword1 = st.text_input("Input term A1", "work", key="word1")
     keyword1 = keyword1.lower()
 
-    keyword3 = st.text_input("Input term B1", "test", key="word3")
+    keyword3 = st.text_input("Input term B1", "hello", key="word3")
     keyword3 = keyword3.lower()
 
 with col2:
     keyword2 = st.text_input("Input term A2", "hard", key="word2")
     keyword2 = keyword2.lower()
 
-    keyword4 = st.text_input("Input term B2", "hello", key="word4")
+    keyword4 = st.text_input("Input term B2", "world", key="word4")
     keyword4 = keyword4.lower()
 
 def distchange(keyword1, keyword2):
