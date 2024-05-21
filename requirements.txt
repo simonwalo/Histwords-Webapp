@@ -7,3 +7,4 @@ scikit-learn~=1.0.2
 adjusttext~=0.7.3
 s3fs~=2022.5.0
 scipy~=1.8.1
+altair<5
